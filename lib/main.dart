@@ -1,6 +1,8 @@
 import 'package:atmacayapi/app/theme/app_theme.dart';
 import 'package:atmacayapi/firebase_options.dart';
-import 'package:atmacayapi/ui/splash_screen/view/splash_view.dart';
+import 'package:atmacayapi/ui/base_screen/view/base_view.dart';
+import 'package:atmacayapi/ui/login_screen/view/login_view.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -19,10 +21,18 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: "Atmaca Yapi",
-      theme: AppTheme.lightTheme,
-      darkTheme: AppTheme.darkTheme,
-      home: SplashView(),
-    );
+        title: "Atmaca Yapi",
+        theme: AppTheme.lightTheme,
+        darkTheme: AppTheme.darkTheme,
+        home: StreamBuilder(
+          stream: FirebaseAuth.instance.authStateChanges(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return BaseView();
+            } else {
+              return LoginView();
+            }
+          },
+        ));
   }
 }

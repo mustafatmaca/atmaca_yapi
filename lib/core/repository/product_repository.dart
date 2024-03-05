@@ -1,4 +1,3 @@
-import 'package:atmacayapi/app/model/category_model.dart';
 import 'package:atmacayapi/app/model/product_model.dart';
 import 'package:atmacayapi/app/theme/app_color.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';

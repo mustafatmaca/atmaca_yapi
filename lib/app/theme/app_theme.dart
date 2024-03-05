@@ -11,8 +11,8 @@ class AppTheme {
       fontFamily: 'Raleway',
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          primary: AppColor.mainRed,
-          onPrimary: AppColor.mainWhite,
+          backgroundColor: AppColor.mainRed,
+          foregroundColor: AppColor.mainWhite,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
           ),
@@ -44,8 +44,8 @@ class AppTheme {
       fontFamily: 'Raleway',
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          primary: AppColor.mainRed,
-          onPrimary: AppColor.mainGray,
+          backgroundColor: AppColor.mainRed,
+          foregroundColor: AppColor.mainGray,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
           ),
