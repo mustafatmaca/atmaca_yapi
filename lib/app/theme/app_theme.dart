@@ -53,17 +53,27 @@ class AppTheme {
         ),
       ),
       textTheme: TextTheme(
-        headline1: TextStyle(
-          fontSize: 18,
+        headlineSmall: TextStyle(
           color: AppColor.mainRed,
         ),
-        subtitle1: TextStyle(
-          fontSize: 16,
+        titleLarge: TextStyle(
           fontWeight: FontWeight.w700,
           color: AppColor.mainRed,
         ),
-        bodyText1: TextStyle(
-            fontSize: 14, fontWeight: FontWeight.w400, color: AppColor.mainRed),
+        titleMedium: TextStyle(
+          fontWeight: FontWeight.w700,
+          color: AppColor.mainRed,
+        ),
+        titleSmall: TextStyle(
+          fontWeight: FontWeight.w700,
+          color: AppColor.mainRed,
+        ),
+        bodyLarge:
+            TextStyle(fontWeight: FontWeight.w400, color: AppColor.mainRed),
+        bodyMedium:
+            TextStyle(fontWeight: FontWeight.w400, color: AppColor.mainRed),
+        bodySmall:
+            TextStyle(fontWeight: FontWeight.w400, color: AppColor.mainRed),
       ),
     );
   }
