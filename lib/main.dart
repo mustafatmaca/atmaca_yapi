@@ -1,6 +1,6 @@
-import 'package:atmacayapi/app/theme/app_theme.dart';
+import 'package:atmacayapi/theme/app_theme.dart';
 import 'package:atmacayapi/firebase_options.dart';
-import 'package:atmacayapi/ui/base_screen/view/base_view.dart';
+import 'package:atmacayapi/ui/home_screen/view/home_view.dart';
 import 'package:atmacayapi/ui/login_screen/view/login_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -22,7 +22,7 @@ void main() async {
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            return BaseView();
+            return HomeView();
           } else {
             return LoginView();
           }

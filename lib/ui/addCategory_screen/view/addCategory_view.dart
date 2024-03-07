@@ -1,7 +1,6 @@
-import 'package:atmacayapi/app/theme/app_color.dart';
-import 'package:atmacayapi/app/theme/app_theme.dart';
+import 'package:atmacayapi/theme/app_color.dart';
+import 'package:atmacayapi/theme/app_theme.dart';
 import 'package:atmacayapi/ui/addCategory_screen/controller/addCategory_controller.dart';
-import 'package:atmacayapi/ui/base_screen/view/base_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -41,10 +40,7 @@ class AddCategoryView extends StatelessWidget {
                 Icons.check,
                 color: AppColor.mainRed,
               ),
-              onPressed: () {
-                addCategoryController.addCategory(nameController.text);
-                Get.offAll(BaseView());
-              },
+              onPressed: () {},
             ),
           ],
         ),

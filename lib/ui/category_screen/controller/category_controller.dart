@@ -1,11 +1,19 @@
-import 'package:atmacayapi/app/model/category_model.dart';
-import 'package:atmacayapi/core/repository/category_repository.dart';
+import 'package:atmacayapi/model/category.dart';
+import 'package:atmacayapi/repository/firestore_repo.dart';
 import 'package:get/get.dart';
 
 class CategoryController extends GetxController {
-  final categoryRepo = CategoryRepository();
+  final firestoreRepo = FirestoreRepo();
+  RxList<Category> categories = <Category>[].obs;
 
-  Future<List<CategoryModel>> getCategories() {
-    return categoryRepo.getCategories();
+  @override
+  void onInit() {
+    // TODO: implement onInit
+    super.onInit();
+    getCategories();
+  }
+
+  void getCategories() async {
+    categories.value = await firestoreRepo.getCategories();
   }
 }
