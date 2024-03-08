@@ -11,32 +11,27 @@ class CategoryView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Kategoriler"),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: RefreshIndicator(
-            onRefresh: () async {
-              categoryController.getCategories();
-            },
-            child: Obx(() => categoryController.categories.isEmpty
-                ? const CircularProgressIndicator()
-                : GridView.builder(
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        mainAxisSpacing: 3,
-                        crossAxisSpacing: 8,
-                        mainAxisExtent:
-                            MediaQuery.of(context).size.height * 0.18),
-                    itemCount: categoryController.categories.length,
-                    itemBuilder: (context, index) {
-                      return CategoryCard(
-                          title: categoryController.categories[index].name!);
-                    },
-                  ))),
-      ),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: RefreshIndicator(
+          onRefresh: () async {
+            categoryController.getCategories();
+          },
+          child: Obx(() => categoryController.categories.isEmpty
+              ? const CircularProgressIndicator()
+              : GridView.builder(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 8,
+                      crossAxisSpacing: 8,
+                      mainAxisExtent:
+                          MediaQuery.of(context).size.height * 0.18),
+                  itemCount: categoryController.categories.length,
+                  itemBuilder: (context, index) {
+                    return CategoryCard(
+                        title: categoryController.categories[index].name!);
+                  },
+                ))),
     );
   }
 }
