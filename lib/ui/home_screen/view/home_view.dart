@@ -1,10 +1,11 @@
 import 'package:atmacayapi/ui/addCategory_screen/view/addCategory_view.dart';
-import 'package:atmacayapi/ui/category_screen/view/category_view.dart';
+import 'package:atmacayapi/ui/home_screen/controller/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HomeView extends StatelessWidget {
-  const HomeView({super.key});
+  final HomeController _homeController = Get.put(HomeController());
+  HomeView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +24,18 @@ class HomeView extends StatelessWidget {
                 icon: const Icon(Icons.add))
           ],
         ),
-        body: CategoryView());
+        bottomNavigationBar: Obx(() => BottomNavigationBar(
+              items: const [
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.home), label: "Anasayfa"),
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.search), label: "Ürün Ara")
+              ],
+              currentIndex: _homeController.index.value,
+              onTap: (value) {
+                _homeController.changePage(value);
+              },
+            )),
+        body: Obx(() => _homeController.pages[_homeController.index.value]));
   }
 }
