@@ -1,20 +1,30 @@
+import 'package:atmacayapi/model/category.dart';
+import 'package:atmacayapi/repository/firestore_repo.dart';
 import 'package:get/get.dart';
 
 class AddProductController extends GetxController {
-  // final productRepo = ProductRepository();
+  final firestoreRepo = FirestoreRepo();
+  RxList<Category> categories = <Category>[].obs;
+  Rx<Category> selectedCategory = Category(name: "Diğer").obs;
 
-  // var index = 0.obs;
-  // var selectedItem = CategoryModel(categoryId: "0", categoryName: "Diğer").obs;
-  // var indexName = "".obs;
-  // var item_count = 1.obs;
+  @override
+  void onInit() {
+    // TODO: implement onInit
+    super.onInit();
+    getCategories();
+  }
 
-  // void setSelected(CategoryModel value) {
-  //   selectedItem.value = value;
-  // }
+  void getCategories() async {
+    categories.value = await firestoreRepo.getCategories();
+    selectedCategory.value = categories.first;
+  }
 
-  // addProducts(String categoryId, String categoryName, String productId,
-  //     String? productName, String? productPrice, int? productStock) {
-  //   productRepo.addProduct(categoryId, categoryName, productId, productName,
-  //       productPrice, productStock);
-  // }
+  void setSelected(Category value) {
+    selectedCategory.value = value;
+  }
+
+  void addProduct(
+      String name, String categoryName, int price, int stock) async {
+    await firestoreRepo.addProduct(name, categoryName, price, stock);
+  }
 }

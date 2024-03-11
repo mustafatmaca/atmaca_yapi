@@ -1,24 +1,181 @@
+import 'package:atmacayapi/model/category.dart';
 import 'package:atmacayapi/ui/addProduct_screen/controller/addProduct_controller.dart';
-import 'package:atmacayapi/ui/category_screen/controller/category_controller.dart';
+import 'package:atmacayapi/ui/productSearch_screen/controller/prdouctSearch_controller.dart';
 import 'package:flutter/material.dart';
-
-AddProductController addProductController = AddProductController();
-CategoryController categoryController = CategoryController();
+import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
 
 class AddProductView extends StatelessWidget {
-  final TextEditingController nameController = TextEditingController();
-  final TextEditingController priceController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _priceController = TextEditingController();
+  final TextEditingController _stockController = TextEditingController();
+  final AddProductController _addProductController =
+      Get.put(AddProductController());
+  final ProductSearchController _productSearchController =
+      Get.put(ProductSearchController());
 
   AddProductView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      top: true,
-      bottom: true,
-      left: true,
-      right: true,
-      child: Scaffold(),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          "Ürün Ekle",
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
+        centerTitle: true,
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back_ios_new,
+          ),
+          onPressed: () {
+            Get.back();
+          },
+        ),
+        actions: [
+          IconButton(
+            icon: const Icon(
+              Icons.check,
+            ),
+            onPressed: () {
+              if (_formKey.currentState!.validate()) {
+                _formKey.currentState!.save();
+                _addProductController.addProduct(
+                    _nameController.text,
+                    _addProductController.selectedCategory.value.name!,
+                    int.tryParse(_priceController.text)!,
+                    int.tryParse(_stockController.text)!);
+                ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text("Başarıyla Kaydedildi")));
+                _productSearchController.getProducts();
+                Get.back();
+              }
+            },
+          ),
+        ],
+      ),
+      body: GestureDetector(
+        onTap: () {
+          FocusScope.of(context).requestFocus(FocusNode());
+        },
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  const Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "Ürün İsmi",
+                    ),
+                  ),
+                  TextFormField(
+                    controller: _nameController,
+                    decoration: InputDecoration(
+                        hintText: "Ürün ismini girin.",
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12.0))),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return "Boş bırakılamaz.";
+                      }
+                      return null;
+                    },
+                    onSaved: (newValue) => _nameController.text = newValue!,
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.02,
+                  ),
+                  const Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "Ürün Fiyatı",
+                    ),
+                  ),
+                  TextFormField(
+                    controller: _priceController,
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                        hintText: "Ürünün fiyatını girin.",
+                        suffixText: "₺",
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12.0))),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return "Boş bırakılamaz.";
+                      }
+                      return null;
+                    },
+                    onSaved: (newValue) => _priceController.text = newValue!,
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.02,
+                  ),
+                  const Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "Ürün Adedi",
+                    ),
+                  ),
+                  TextFormField(
+                    controller: _stockController,
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                        hintText: "Ürünün adedini girin.",
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12.0))),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return "Boş bırakılamaz.";
+                      }
+                      return null;
+                    },
+                    onSaved: (newValue) => _stockController.text = newValue!,
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.02,
+                  ),
+                  const Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "Eğitim Durumu",
+                    ),
+                  ),
+                  DecoratedBox(
+                    decoration: BoxDecoration(
+                        border: Border.all(width: 1, color: Colors.black38),
+                        borderRadius: BorderRadius.circular(14)),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Obx(() => DropdownButton<Category>(
+                            value: _addProductController.selectedCategory.value,
+                            icon: Icon(Icons.arrow_drop_down),
+                            underline: Container(),
+                            borderRadius: BorderRadius.circular(8),
+                            isExpanded: true,
+                            items: _addProductController.categories
+                                .map<DropdownMenuItem<Category>>(
+                                    (Category element) => DropdownMenuItem(
+                                          child: Text(element.name!),
+                                          value: element,
+                                        ))
+                                .toList(),
+                            onChanged: (value) {
+                              _addProductController.setSelected(value!);
+                            },
+                          )),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
