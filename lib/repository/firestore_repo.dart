@@ -58,4 +58,20 @@ class FirestoreRepo {
       return [];
     }
   }
+
+  Future<List<Product>> getProductsByCategory(String category) async {
+    try {
+      final snapshot = await firestoreInstance
+          .collection("products")
+          .where("categoryName", isEqualTo: category)
+          .get();
+      final productList =
+          snapshot.docs.map((e) => Product.fromMap(e.data())).toList();
+      print("$category ürünleri getirildi!");
+      return productList;
+    } catch (e) {
+      print("Bir hata oluştu");
+      return [];
+    }
+  }
 }
