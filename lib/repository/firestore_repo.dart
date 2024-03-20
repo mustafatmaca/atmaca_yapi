@@ -46,11 +46,20 @@ class FirestoreRepo {
     }
   }
 
+  Future<String> deleteProduct(String id) async {
+    try {
+      await firestoreInstance.collection("products").doc(id).delete();
+      return "Ürün Başaryla Silindi";
+    } catch (e) {
+      return "Ürün Silinemedi! Bir hata ile karşılaşıldı!";
+    }
+  }
+
   Future<List<Product>> getProducts() async {
     try {
       final snapshot = await firestoreInstance.collection("products").get();
       final productList =
-          snapshot.docs.map((e) => Product.fromMap(e.data())).toList();
+          snapshot.docs.map((e) => Product.fromMap(e.data(), e.id)).toList();
       print("Ürünler Getirildi!");
       return productList;
     } catch (e) {
@@ -66,7 +75,7 @@ class FirestoreRepo {
           .where("categoryName", isEqualTo: category)
           .get();
       final productList =
-          snapshot.docs.map((e) => Product.fromMap(e.data())).toList();
+          snapshot.docs.map((e) => Product.fromMap(e.data(), e.id)).toList();
       print("$category ürünleri getirildi!");
       return productList;
     } catch (e) {

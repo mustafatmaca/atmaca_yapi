@@ -1,12 +1,14 @@
 import 'dart:convert';
 
 class Product {
+  String? id;
   String? name;
   String? categoryName;
   int? price;
   int? stock;
 
   Product({
+    this.id,
     this.name,
     this.categoryName,
     this.price,
@@ -22,8 +24,9 @@ class Product {
     };
   }
 
-  factory Product.fromMap(Map<String, dynamic> map) {
+  factory Product.fromMap(Map<String, dynamic> map, String? id) {
     return Product(
+      id: id,
       name: map['name'] != null ? map['name'] as String : null,
       categoryName:
           map['categoryName'] != null ? map['categoryName'] as String : null,
@@ -35,5 +38,5 @@ class Product {
   String toJson() => json.encode(toMap());
 
   factory Product.fromJson(String source) =>
-      Product.fromMap(json.decode(source) as Map<String, dynamic>);
+      Product.fromMap(json.decode(source) as Map<String, dynamic>, null);
 }

@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:atmacayapi/ui/productDetail_screen/view/productDetail_view.dart';
 import 'package:atmacayapi/ui/product_screen/controller/product_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -33,6 +34,10 @@ class ProductView extends StatelessWidget {
             itemCount: _productController.products.length,
             itemBuilder: (context, index) {
               return ListTile(
+                onTap: () {
+                  Get.to(() => ProductDetailView(
+                      product: _productController.products[index]));
+                },
                 title: Text(
                   _productController.products[index].name!,
                   style: Theme.of(context)

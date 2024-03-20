@@ -1,5 +1,4 @@
 import 'package:atmacayapi/ui/addCategory_screen/controller/addCategory_controller.dart';
-import 'package:atmacayapi/ui/category_screen/controller/category_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -8,7 +7,6 @@ class AddCategoryView extends StatelessWidget {
   final TextEditingController _nameController = TextEditingController();
   final AddCategoryController _addCategoryController =
       Get.put(AddCategoryController());
-  final CategoryController _categoryController = Get.put(CategoryController());
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +36,6 @@ class AddCategoryView extends StatelessWidget {
                 _addCategoryController.addCategory(_nameController.text);
                 ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text("Başarıyla Kaydedildi")));
-                _categoryController.getCategories();
                 Get.back();
               }
             },
