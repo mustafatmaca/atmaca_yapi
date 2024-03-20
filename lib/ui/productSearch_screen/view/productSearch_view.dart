@@ -25,7 +25,8 @@ class ProductSearchView extends StatelessWidget {
             height: MediaQuery.of(context).size.height * 0.02,
           ),
           Expanded(
-            child: ListView.builder(
+              child: Obx(
+            () => ListView.builder(
               itemCount: _productSearchController.products.length,
               itemBuilder: (context, index) {
                 return ListTile(
@@ -43,7 +44,7 @@ class ProductSearchView extends StatelessWidget {
                 );
               },
             ),
-          )
+          ))
         ],
       ),
     );

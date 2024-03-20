@@ -1,8 +1,7 @@
 import 'package:atmacayapi/model/category.dart';
 import 'package:atmacayapi/ui/addProduct_screen/controller/addProduct_controller.dart';
-import 'package:atmacayapi/ui/productSearch_screen/controller/prdouctSearch_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class AddProductView extends StatelessWidget {
@@ -12,9 +11,6 @@ class AddProductView extends StatelessWidget {
   final TextEditingController _stockController = TextEditingController();
   final AddProductController _addProductController =
       Get.put(AddProductController());
-  final ProductSearchController _productSearchController =
-      Get.put(ProductSearchController());
-
   AddProductView({super.key});
 
   @override
@@ -49,7 +45,6 @@ class AddProductView extends StatelessWidget {
                     int.tryParse(_stockController.text)!);
                 ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text("Başarıyla Kaydedildi")));
-                _productSearchController.getProducts();
                 Get.back();
               }
             },
@@ -99,6 +94,9 @@ class AddProductView extends StatelessWidget {
                   TextFormField(
                     controller: _priceController,
                     keyboardType: TextInputType.number,
+                    inputFormatters: <TextInputFormatter>[
+                      FilteringTextInputFormatter.digitsOnly
+                    ],
                     decoration: InputDecoration(
                         hintText: "Ürünün fiyatını girin.",
                         suffixText: "₺",
@@ -124,6 +122,9 @@ class AddProductView extends StatelessWidget {
                   TextFormField(
                     controller: _stockController,
                     keyboardType: TextInputType.number,
+                    inputFormatters: <TextInputFormatter>[
+                      FilteringTextInputFormatter.digitsOnly
+                    ],
                     decoration: InputDecoration(
                         hintText: "Ürünün adedini girin.",
                         border: OutlineInputBorder(
