@@ -1,5 +1,6 @@
 import 'package:atmacayapi/model/product.dart';
 import 'package:atmacayapi/ui/productDetail_screen/controller/productDetail_controller.dart';
+import 'package:atmacayapi/ui/productEdit_screen/view/productEdit_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -16,7 +17,9 @@ class ProductDetailView extends StatelessWidget {
         title: Text(product.name!),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Get.to(() => ProductEditView(product: product));
+            },
             icon: Icon(Icons.edit),
             tooltip: "Düzenle",
           ),

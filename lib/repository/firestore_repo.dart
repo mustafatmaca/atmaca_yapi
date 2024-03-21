@@ -55,6 +55,21 @@ class FirestoreRepo {
     }
   }
 
+  Future<String> updateProduct(
+      String id, String name, String categoryName, int price, int stock) async {
+    try {
+      await firestoreInstance.collection("products").doc(id).update(Product(
+              name: name,
+              categoryName: categoryName,
+              price: price,
+              stock: stock)
+          .toMap());
+      return "Ürün Güncellendi!";
+    } catch (e) {
+      return "Ürün Güncellenemedi! Bir hata ile karşılaşıldı!";
+    }
+  }
+
   Future<List<Product>> getProducts() async {
     try {
       final snapshot = await firestoreInstance.collection("products").get();
