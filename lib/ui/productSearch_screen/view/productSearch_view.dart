@@ -17,6 +17,7 @@ class ProductSearchView extends StatelessWidget {
           TextField(
             decoration: InputDecoration(
               hintText: "Ürün ara...",
+              hintStyle: Theme.of(context).textTheme.bodyLarge,
               border:
                   OutlineInputBorder(borderRadius: BorderRadius.circular(12.0)),
             ),

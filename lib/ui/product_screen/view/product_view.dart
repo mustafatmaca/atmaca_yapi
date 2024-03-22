@@ -17,7 +17,10 @@ class ProductView extends StatelessWidget {
         Get.put(ProductController(category: category));
     return Scaffold(
       appBar: AppBar(
-        title: Text(category),
+        title: Text(
+          category,
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
         leading: IconButton(
           icon: const Icon(
             Icons.arrow_back_ios_new,

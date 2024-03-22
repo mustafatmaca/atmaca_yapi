@@ -1,4 +1,5 @@
 import 'package:atmacayapi/model/category.dart';
+import 'package:atmacayapi/theme/app_color.dart';
 import 'package:atmacayapi/ui/addProduct_screen/controller/addProduct_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -72,6 +73,7 @@ class AddProductView extends StatelessWidget {
                     controller: _nameController,
                     decoration: InputDecoration(
                         hintText: "Ürün ismini girin.",
+                        hintStyle: Theme.of(context).textTheme.bodyLarge,
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12.0))),
                     validator: (value) {
@@ -99,6 +101,7 @@ class AddProductView extends StatelessWidget {
                     ],
                     decoration: InputDecoration(
                         hintText: "Ürünün fiyatını girin.",
+                        hintStyle: Theme.of(context).textTheme.bodyLarge,
                         suffixText: "₺",
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12.0))),
@@ -127,6 +130,7 @@ class AddProductView extends StatelessWidget {
                     ],
                     decoration: InputDecoration(
                         hintText: "Ürünün adedini girin.",
+                        hintStyle: Theme.of(context).textTheme.bodyLarge,
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12.0))),
                     validator: (value) {
@@ -143,18 +147,29 @@ class AddProductView extends StatelessWidget {
                   const Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      "Eğitim Durumu",
+                      "Kategori",
                     ),
                   ),
                   DecoratedBox(
                     decoration: BoxDecoration(
-                        border: Border.all(width: 1, color: Colors.black38),
+                        border: Border.all(
+                          width: 1,
+                          color: MediaQuery.of(context).platformBrightness ==
+                                  Brightness.light
+                              ? AppColor.textLight
+                              : AppColor.textDark.withOpacity(0.4),
+                        ),
                         borderRadius: BorderRadius.circular(14)),
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Obx(() => DropdownButton<Category>(
                             value: _addProductController.selectedCategory.value,
                             icon: Icon(Icons.arrow_drop_down),
+                            dropdownColor:
+                                MediaQuery.of(context).platformBrightness ==
+                                        Brightness.light
+                                    ? AppColor.backgroundLight
+                                    : AppColor.backgroundDark,
                             underline: Container(),
                             borderRadius: BorderRadius.circular(8),
                             isExpanded: true,

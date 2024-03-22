@@ -4,95 +4,91 @@ import 'app_color.dart';
 class AppTheme {
   static ThemeData get lightTheme {
     return ThemeData(
+      useMaterial3: true,
       primaryColor: AppColor.mainRed,
-      scaffoldBackgroundColor: AppColor.mainWhite,
-      cardColor: AppColor.mainGray,
+      scaffoldBackgroundColor: AppColor.backgroundLight,
       iconTheme: IconThemeData(color: AppColor.mainRed),
-      fontFamily: 'Raleway',
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColor.mainRed,
-          foregroundColor: AppColor.mainWhite,
+          foregroundColor: AppColor.textDark,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
           ),
-          fixedSize: Size(400, 50),
         ),
       ),
       dividerColor: AppColor.mainRed,
       appBarTheme: AppBarTheme(
-        backgroundColor: AppColor.mainWhite,
+        backgroundColor: AppColor.backgroundLight,
         scrolledUnderElevation: 0,
         iconTheme: IconThemeData(
           color: AppColor.mainRed,
         ),
         shape: Border(bottom: BorderSide(color: AppColor.mainRed, width: 1)),
       ),
-      textTheme: TextTheme(
-        headlineLarge: TextStyle(
-          fontSize: 26,
-          color: AppColor.mainRed,
-        ),
-        labelMedium: TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.w700,
-          color: AppColor.mainRed,
-        ),
-        bodySmall: TextStyle(
-            fontSize: 14, fontWeight: FontWeight.w400, color: AppColor.mainRed),
+      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+        backgroundColor: AppColor.backgroundLight,
+        selectedItemColor: AppColor.mainRed,
+        selectedIconTheme: IconThemeData(color: AppColor.mainRed),
+        selectedLabelStyle: TextStyle(color: AppColor.mainRed),
+        unselectedItemColor: AppColor.textLight,
+        unselectedIconTheme: IconThemeData(color: AppColor.textLight),
+        unselectedLabelStyle: TextStyle(color: AppColor.textLight),
       ),
+      textTheme: Typography.blackMountainView,
+      inputDecorationTheme: InputDecorationTheme(
+        focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: AppColor.mainRed,
+            ),
+            borderRadius: BorderRadius.circular(12.0)),
+      ),
+      dialogBackgroundColor: AppColor.backgroundLight,
     );
   }
 
   static ThemeData get darkTheme {
     return ThemeData(
+      useMaterial3: true,
       primaryColor: AppColor.mainRed,
       scaffoldBackgroundColor: AppColor.backgroundDark,
-      cardColor: AppColor.mainWhite,
-      iconTheme: IconThemeData(color: AppColor.mainWhite),
-      fontFamily: 'Raleway',
+      iconTheme: IconThemeData(color: AppColor.textDark),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColor.mainRed,
-          foregroundColor: AppColor.mainGray,
+          foregroundColor: AppColor.textDark,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
           ),
-          fixedSize: Size(350, 50),
         ),
       ),
-      dividerColor: AppColor.mainWhite,
+      dividerColor: AppColor.textDark,
       appBarTheme: AppBarTheme(
         backgroundColor: AppColor.backgroundDark,
         scrolledUnderElevation: 0,
         iconTheme: IconThemeData(
-          color: AppColor.mainWhite,
+          color: AppColor.textDark,
         ),
-        shape: Border(bottom: BorderSide(color: AppColor.mainWhite, width: 1)),
+        shape: Border(bottom: BorderSide(color: AppColor.textDark, width: 1)),
       ),
-      textTheme: TextTheme(
-        headlineSmall: TextStyle(
-          color: AppColor.mainWhite,
-        ),
-        titleLarge: TextStyle(
-          fontWeight: FontWeight.w700,
-          color: AppColor.mainWhite,
-        ),
-        titleMedium: TextStyle(
-          fontWeight: FontWeight.w700,
-          color: AppColor.mainWhite,
-        ),
-        titleSmall: TextStyle(
-          fontWeight: FontWeight.w700,
-          color: AppColor.mainWhite,
-        ),
-        bodyLarge:
-            TextStyle(fontWeight: FontWeight.w400, color: AppColor.mainWhite),
-        bodyMedium:
-            TextStyle(fontWeight: FontWeight.w400, color: AppColor.mainWhite),
-        bodySmall:
-            TextStyle(fontWeight: FontWeight.w400, color: AppColor.mainWhite),
+      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+        backgroundColor: AppColor.backgroundDark,
+        selectedItemColor: AppColor.mainRed,
+        selectedIconTheme: IconThemeData(color: AppColor.mainRed),
+        selectedLabelStyle: TextStyle(color: AppColor.mainRed),
+        unselectedItemColor: AppColor.textDark,
+        unselectedIconTheme: IconThemeData(color: AppColor.textDark),
+        unselectedLabelStyle: TextStyle(color: AppColor.textDark),
       ),
+      textTheme: Typography.whiteMountainView,
+      inputDecorationTheme: InputDecorationTheme(
+        focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: AppColor.mainRed,
+            ),
+            borderRadius: BorderRadius.circular(12.0)),
+      ),
+      dialogBackgroundColor: AppColor.backgroundDark,
     );
   }
 }

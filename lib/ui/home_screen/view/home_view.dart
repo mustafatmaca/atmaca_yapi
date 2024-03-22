@@ -20,10 +20,15 @@ class HomeView extends StatelessWidget {
           ),
         ),
         floatingActionButton: SpeedDial(
+          overlayOpacity: 0.2,
+          overlayColor:
+              MediaQuery.of(context).platformBrightness == Brightness.light
+                  ? AppColor.backgroundLight
+                  : AppColor.backgroundDark,
           backgroundColor: Theme.of(context).primaryColor,
-          foregroundColor: AppColor.mainWhite,
+          foregroundColor: AppColor.textDark,
           activeBackgroundColor: Theme.of(context).primaryColor,
-          activeForegroundColor: AppColor.mainWhite,
+          activeForegroundColor: AppColor.textDark,
           icon: Icons.add,
           activeIcon: Icons.close,
           children: [
@@ -32,10 +37,10 @@ class HomeView extends StatelessWidget {
               labelStyle: Theme.of(context)
                   .textTheme
                   .bodyLarge!
-                  .copyWith(color: AppColor.mainWhite),
+                  .copyWith(color: AppColor.textDark),
               labelBackgroundColor: Theme.of(context).primaryColor,
               backgroundColor: Theme.of(context).primaryColor,
-              foregroundColor: AppColor.mainWhite,
+              foregroundColor: AppColor.textDark,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
@@ -49,10 +54,10 @@ class HomeView extends StatelessWidget {
               labelStyle: Theme.of(context)
                   .textTheme
                   .bodySmall!
-                  .copyWith(color: AppColor.mainWhite),
+                  .copyWith(color: AppColor.textDark),
               labelBackgroundColor: Theme.of(context).primaryColor,
               backgroundColor: Theme.of(context).primaryColor,
-              foregroundColor: AppColor.mainWhite,
+              foregroundColor: AppColor.textDark,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(24),
               ),

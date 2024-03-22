@@ -14,7 +14,18 @@ class ProductDetailView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(product.name!),
+        title: Text(
+          product.name!,
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back_ios_new,
+          ),
+          onPressed: () {
+            Get.back();
+          },
+        ),
         actions: [
           IconButton(
             onPressed: () {

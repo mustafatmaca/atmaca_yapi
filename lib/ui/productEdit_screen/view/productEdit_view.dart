@@ -1,5 +1,6 @@
 import 'package:atmacayapi/model/category.dart';
 import 'package:atmacayapi/model/product.dart';
+import 'package:atmacayapi/theme/app_color.dart';
 import 'package:atmacayapi/ui/home_screen/view/home_view.dart';
 import 'package:atmacayapi/ui/productEdit_screen/controller/productEdit_controller.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +23,10 @@ class ProductEditView extends StatelessWidget {
             category: product.categoryName!));
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Düzenle"),
+        title: Text(
+          "Düzenle",
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
         centerTitle: true,
         leading: IconButton(
           icon: const Icon(
@@ -153,12 +157,18 @@ class ProductEditView extends StatelessWidget {
                     const Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        "Eğitim Durumu",
+                        "Kategori",
                       ),
                     ),
                     DecoratedBox(
                       decoration: BoxDecoration(
-                          border: Border.all(width: 1, color: Colors.black38),
+                          border: Border.all(
+                            width: 1,
+                            color: MediaQuery.of(context).platformBrightness ==
+                                    Brightness.light
+                                ? AppColor.textLight
+                                : AppColor.textDark.withOpacity(0.4),
+                          ),
                           borderRadius: BorderRadius.circular(14)),
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -166,6 +176,11 @@ class ProductEditView extends StatelessWidget {
                               value:
                                   _productEditController.selectedCategory.value,
                               icon: Icon(Icons.arrow_drop_down),
+                              dropdownColor:
+                                  MediaQuery.of(context).platformBrightness ==
+                                          Brightness.light
+                                      ? AppColor.backgroundLight
+                                      : AppColor.backgroundDark,
                               underline: Container(),
                               borderRadius: BorderRadius.circular(8),
                               isExpanded: true,
