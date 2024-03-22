@@ -6,7 +6,7 @@ import 'package:atmacayapi/model/category.dart';
 import 'package:atmacayapi/model/product.dart';
 import 'package:atmacayapi/repository/firestore_repo.dart';
 import 'package:atmacayapi/ui/productDetail_screen/controller/productDetail_controller.dart';
-import 'package:atmacayapi/ui/productSearch_screen/controller/prdouctSearch_controller.dart';
+import 'package:atmacayapi/ui/productSearch_screen/controller/productSearch_controller.dart';
 import 'package:atmacayapi/ui/product_screen/controller/product_controller.dart';
 
 class ProductEditController extends GetxController {

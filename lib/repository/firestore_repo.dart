@@ -19,7 +19,10 @@ class FirestoreRepo {
 
   Future<List<Category>> getCategories() async {
     try {
-      final snapshot = await firestoreInstance.collection("categories").get();
+      final snapshot = await firestoreInstance
+          .collection("categories")
+          .orderBy('name')
+          .get();
       final categoryList =
           snapshot.docs.map((e) => Category.fromMap(e.data())).toList();
       print("Kategoriler Getirildi!");
@@ -72,7 +75,8 @@ class FirestoreRepo {
 
   Future<List<Product>> getProducts() async {
     try {
-      final snapshot = await firestoreInstance.collection("products").get();
+      final snapshot =
+          await firestoreInstance.collection("products").orderBy('name').get();
       final productList =
           snapshot.docs.map((e) => Product.fromMap(e.data(), e.id)).toList();
       print("Ürünler Getirildi!");
@@ -87,6 +91,7 @@ class FirestoreRepo {
     try {
       final snapshot = await firestoreInstance
           .collection("products")
+          .orderBy('name')
           .where("categoryName", isEqualTo: category)
           .get();
       final productList =
@@ -95,6 +100,21 @@ class FirestoreRepo {
       return productList;
     } catch (e) {
       print("Bir hata oluştu");
+      return [];
+    }
+  }
+
+  Future<List<Product>> getProductsByName(String searchText) async {
+    try {
+      final snapshot =
+          await firestoreInstance.collection("products").orderBy('name').get();
+      final productList =
+          snapshot.docs.map((e) => Product.fromMap(e.data(), e.id)).toList();
+      return productList
+          .where((element) =>
+              element.name!.toLowerCase().contains(searchText.toLowerCase()))
+          .toList();
+    } catch (e) {
       return [];
     }
   }

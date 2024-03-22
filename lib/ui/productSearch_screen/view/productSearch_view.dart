@@ -1,4 +1,4 @@
-import 'package:atmacayapi/ui/productSearch_screen/controller/prdouctSearch_controller.dart';
+import 'package:atmacayapi/ui/productSearch_screen/controller/productSearch_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
@@ -20,6 +20,9 @@ class ProductSearchView extends StatelessWidget {
               border:
                   OutlineInputBorder(borderRadius: BorderRadius.circular(12.0)),
             ),
+            onChanged: (value) {
+              _productSearchController.getProductsByName(value);
+            },
           ),
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.02,

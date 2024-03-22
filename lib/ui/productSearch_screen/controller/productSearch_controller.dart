@@ -16,4 +16,8 @@ class ProductSearchController extends GetxController {
   void getProducts() async {
     products.value = await firestoreRepo.getProducts();
   }
+
+  void getProductsByName(String searchText) async {
+    products.value = await firestoreRepo.getProductsByName(searchText);
+  }
 }

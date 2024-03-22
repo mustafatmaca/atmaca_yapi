@@ -1,6 +1,6 @@
 import 'package:atmacayapi/model/category.dart';
 import 'package:atmacayapi/repository/firestore_repo.dart';
-import 'package:atmacayapi/ui/productSearch_screen/controller/prdouctSearch_controller.dart';
+import 'package:atmacayapi/ui/productSearch_screen/controller/productSearch_controller.dart';
 import 'package:get/get.dart';
 
 class AddProductController extends GetxController {
