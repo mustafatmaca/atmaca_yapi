@@ -34,7 +34,7 @@ class FirestoreRepo {
   }
 
   Future<String> addProduct(
-      String name, String categoryName, int price, int stock) async {
+      String name, String categoryName, double price, int stock) async {
     try {
       final docRef = await firestoreInstance.collection("products").add(Product(
               name: name,
@@ -58,8 +58,8 @@ class FirestoreRepo {
     }
   }
 
-  Future<String> updateProduct(
-      String id, String name, String categoryName, int price, int stock) async {
+  Future<String> updateProduct(String id, String name, String categoryName,
+      double price, int stock) async {
     try {
       await firestoreInstance.collection("products").doc(id).update(Product(
               name: name,

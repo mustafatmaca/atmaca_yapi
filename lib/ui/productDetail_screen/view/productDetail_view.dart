@@ -95,7 +95,7 @@ class ProductDetailView extends StatelessWidget {
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
                 Text(
-                  "${product.price!} ₺",
+                  "${product.price!.toStringAsFixed(product.price!.truncateToDouble() == product.price! ? 0 : 2)} ₺",
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
               ],

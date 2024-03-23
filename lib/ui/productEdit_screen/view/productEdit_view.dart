@@ -1,7 +1,6 @@
 import 'package:atmacayapi/model/category.dart';
 import 'package:atmacayapi/model/product.dart';
 import 'package:atmacayapi/theme/app_color.dart';
-import 'package:atmacayapi/ui/home_screen/view/home_view.dart';
 import 'package:atmacayapi/ui/productEdit_screen/controller/productEdit_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -18,7 +17,10 @@ class ProductEditView extends StatelessWidget {
     final ProductEditController _productEditController = Get.put(
         ProductEditController(
             name: product.name!,
-            price: product.price.toString(),
+            price: product.price!
+                .toStringAsFixed(
+                    product.price!.truncateToDouble() == product.price! ? 0 : 2)
+                .toString(),
             stock: product.stock.toString(),
             category: product.categoryName!));
     return Scaffold(
@@ -46,13 +48,13 @@ class ProductEditView extends StatelessWidget {
                     name: _productEditController.nameController.text,
                     categoryName:
                         _productEditController.selectedCategory.value.name,
-                    price: int.tryParse(
+                    price: double.tryParse(
                         _productEditController.priceController.text)!,
                     stock: int.tryParse(
                         _productEditController.stockController.text)!));
                 ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text("Başarıyla Güncellendi")));
-                Get.offAll(HomeView());
+                Get.back();
               }
             },
             icon: const Icon(Icons.check),
@@ -105,9 +107,11 @@ class ProductEditView extends StatelessWidget {
                     ),
                     TextFormField(
                       controller: _productEditController.priceController,
-                      keyboardType: TextInputType.number,
+                      keyboardType:
+                          const TextInputType.numberWithOptions(decimal: true),
                       inputFormatters: <TextInputFormatter>[
-                        FilteringTextInputFormatter.digitsOnly
+                        FilteringTextInputFormatter.allow(
+                            RegExp(r'^\d+\.?\d{0,2}'))
                       ],
                       decoration: InputDecoration(
                           hintText: "Ürünün fiyatını girin.",

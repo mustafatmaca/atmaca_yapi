@@ -42,7 +42,7 @@ class AddProductView extends StatelessWidget {
                 _addProductController.addProduct(
                     _nameController.text,
                     _addProductController.selectedCategory.value.name!,
-                    int.tryParse(_priceController.text)!,
+                    double.tryParse(_priceController.text)!,
                     int.tryParse(_stockController.text)!);
                 ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text("Başarıyla Kaydedildi")));
@@ -95,9 +95,11 @@ class AddProductView extends StatelessWidget {
                   ),
                   TextFormField(
                     controller: _priceController,
-                    keyboardType: TextInputType.number,
+                    keyboardType:
+                        const TextInputType.numberWithOptions(decimal: true),
                     inputFormatters: <TextInputFormatter>[
-                      FilteringTextInputFormatter.digitsOnly
+                      FilteringTextInputFormatter.allow(
+                          RegExp(r'^\d+\.?\d{0,2}'))
                     ],
                     decoration: InputDecoration(
                         hintText: "Ürünün fiyatını girin.",

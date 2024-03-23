@@ -42,7 +42,7 @@ class ProductSearchView extends StatelessWidget {
                         .copyWith(fontWeight: FontWeight.bold),
                   ),
                   trailing: Text(
-                    "${_productSearchController.products[index].price} ₺",
+                    "${_productSearchController.products[index].price!.toStringAsFixed(_productSearchController.products[index].price!.truncateToDouble() == _productSearchController.products[index].price! ? 0 : 2)} ₺",
                     style: Theme.of(context).textTheme.titleMedium,
                   ),
                 );

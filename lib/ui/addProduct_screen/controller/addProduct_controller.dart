@@ -26,7 +26,7 @@ class AddProductController extends GetxController {
   }
 
   void addProduct(
-      String name, String categoryName, int price, int stock) async {
+      String name, String categoryName, double price, int stock) async {
     await firestoreRepo.addProduct(name, categoryName, price, stock);
 
     productSearchController.getProducts();

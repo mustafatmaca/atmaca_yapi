@@ -4,7 +4,7 @@ class Product {
   String? id;
   String? name;
   String? categoryName;
-  int? price;
+  double? price;
   int? stock;
 
   Product({
@@ -30,7 +30,11 @@ class Product {
       name: map['name'] != null ? map['name'] as String : null,
       categoryName:
           map['categoryName'] != null ? map['categoryName'] as String : null,
-      price: map['price'] != null ? map['price'] as int : null,
+      price: map['price'] != null
+          ? map['price'] is int
+              ? (map['price'] as int).toDouble()
+              : map['price'] as double
+          : null,
       stock: map['stock'] != null ? map['stock'] as int : null,
     );
   }
