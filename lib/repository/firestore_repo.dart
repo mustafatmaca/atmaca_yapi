@@ -110,9 +110,21 @@ class FirestoreRepo {
           await firestoreInstance.collection("products").orderBy('name').get();
       final productList =
           snapshot.docs.map((e) => Product.fromMap(e.data(), e.id)).toList();
+
+      String normalizeTurkishChars(String input) {
+        return input
+            .replaceAll('ı', 'i')
+            .replaceAll('ş', 's')
+            .replaceAll('ç', 'c')
+            .replaceAll('ü', 'u')
+            .replaceAll('ö', 'o')
+            .replaceAll('ğ', 'g');
+      }
+
       return productList
-          .where((element) =>
-              element.name!.toLowerCase().contains(searchText.toLowerCase()))
+          .where((element) => normalizeTurkishChars(element.name!)
+              .toLowerCase()
+              .contains(normalizeTurkishChars(searchText).toLowerCase()))
           .toList();
     } catch (e) {
       return [];
