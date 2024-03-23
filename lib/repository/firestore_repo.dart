@@ -122,9 +122,8 @@ class FirestoreRepo {
       }
 
       return productList
-          .where((element) => normalizeTurkishChars(element.name!)
-              .toLowerCase()
-              .contains(normalizeTurkishChars(searchText).toLowerCase()))
+          .where((element) => normalizeTurkishChars(element.name!.toLowerCase())
+              .contains(normalizeTurkishChars(searchText.toLowerCase())))
           .toList();
     } catch (e) {
       return [];
