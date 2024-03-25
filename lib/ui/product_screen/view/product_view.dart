@@ -29,6 +29,43 @@ class ProductView extends StatelessWidget {
             Get.back();
           },
         ),
+        actions: [
+          category != "Diğer"
+              ? IconButton(
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: Text("Uyarı"),
+                          content: Text(
+                              "Kategoriyi silmek istediğinize emin misiniz? Ürünler 'Diğer' adlı kategoriye taşınacak."),
+                          actions: [
+                            TextButton(
+                                onPressed: () {
+                                  Get.back();
+                                },
+                                child: Text("Hayır")),
+                            TextButton(
+                                onPressed: () {
+                                  _productController.deleteCategory(category);
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                          content: Text("Kategori Silindi!")));
+                                  Get.back();
+                                  Get.back();
+                                },
+                                child: Text("Evet")),
+                          ],
+                        );
+                      },
+                    );
+                  },
+                  icon: Icon(Icons.delete),
+                  tooltip: "Sil",
+                )
+              : Container(),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),

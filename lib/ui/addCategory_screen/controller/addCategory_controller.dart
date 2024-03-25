@@ -5,9 +5,10 @@ import 'package:get/get.dart';
 class AddCategoryController extends GetxController {
   final firestoreRepo = FirestoreRepo();
   final CategoryController categoryController = Get.find();
+  RxString message = "".obs;
 
   void addCategory(String name) async {
-    await firestoreRepo.addCategory(name);
+    message.value = await firestoreRepo.addCategory(name);
 
     categoryController.getCategories();
 

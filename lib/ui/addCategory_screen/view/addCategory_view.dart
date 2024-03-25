@@ -34,8 +34,9 @@ class AddCategoryView extends StatelessWidget {
               if (_formKey.currentState!.validate()) {
                 _formKey.currentState!.save();
                 _addCategoryController.addCategory(_nameController.text);
-                ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text("Başarıyla Kaydedildi")));
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content:
+                        Obx(() => Text(_addCategoryController.message.value))));
                 Get.back();
               }
             },

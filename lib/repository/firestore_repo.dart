@@ -2,18 +2,82 @@ import 'package:atmacayapi/model/category.dart';
 import 'package:atmacayapi/model/product.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+String normalizeTurkishChars(String input) {
+  return input
+      .replaceAll('ı', 'i')
+      .replaceAll('ş', 's')
+      .replaceAll('ç', 'c')
+      .replaceAll('ü', 'u')
+      .replaceAll('ö', 'o')
+      .replaceAll('ğ', 'g');
+}
+
 class FirestoreRepo {
   final firestoreInstance = FirebaseFirestore.instance;
 
   Future<String> addCategory(String name) async {
     try {
-      final docRef = await firestoreInstance
+      bool isExist = false;
+      final snapshot = await firestoreInstance
           .collection("categories")
-          .add(Category(name: name).toMap());
-      print("Kategori Eklendi : ${docRef.id}");
-      return "Kategori Oluşturuldu!";
+          .orderBy('name')
+          .get();
+      final categoryList =
+          snapshot.docs.map((e) => Category.fromMap(e.data())).toList();
+
+      for (var category in categoryList) {
+        if (normalizeTurkishChars(category.name!.toLowerCase()).toLowerCase() ==
+            normalizeTurkishChars(name.toLowerCase()).toLowerCase()) {
+          isExist = true;
+          break;
+        }
+      }
+
+      if (isExist) {
+        return "Aynı isimde bir kategori var!";
+      } else {
+        final docRef = await firestoreInstance
+            .collection("categories")
+            .add(Category(name: name).toMap());
+        print("Kategori Eklendi : ${docRef.id}");
+        return "Kategori Oluşturuldu!";
+      }
     } catch (e) {
       return "Kategori Oluşturulamadı! Bir hata ile karşılaşıldı!";
+    }
+  }
+
+  Future<String> deleteCategory(String categoryName) async {
+    try {
+      final snapshot = await firestoreInstance
+          .collection("products")
+          .orderBy('name')
+          .where("categoryName", isEqualTo: categoryName)
+          .get();
+
+      final productList =
+          snapshot.docs.map((e) => Product.fromMap(e.data(), e.id)).toList();
+
+      for (var p in productList) {
+        await firestoreInstance.collection("products").doc(p.id).update(Product(
+                name: p.name,
+                categoryName: 'Diğer',
+                price: p.price,
+                stock: p.stock)
+            .toMap());
+      }
+
+      var categoryQuerySnapshot = await firestoreInstance
+          .collection("categories")
+          .where('name', isEqualTo: categoryName)
+          .get();
+
+      var categoryId = categoryQuerySnapshot.docs.first.id;
+
+      await firestoreInstance.collection("categories").doc(categoryId).delete();
+      return "Kategori Başaryla Silindi";
+    } catch (e) {
+      return "Kategori Silinemedi! Bir hata ile karşılaşıldı!";
     }
   }
 
@@ -110,16 +174,6 @@ class FirestoreRepo {
           await firestoreInstance.collection("products").orderBy('name').get();
       final productList =
           snapshot.docs.map((e) => Product.fromMap(e.data(), e.id)).toList();
-
-      String normalizeTurkishChars(String input) {
-        return input
-            .replaceAll('ı', 'i')
-            .replaceAll('ş', 's')
-            .replaceAll('ç', 'c')
-            .replaceAll('ü', 'u')
-            .replaceAll('ö', 'o')
-            .replaceAll('ğ', 'g');
-      }
 
       return productList
           .where((element) => normalizeTurkishChars(element.name!.toLowerCase())
