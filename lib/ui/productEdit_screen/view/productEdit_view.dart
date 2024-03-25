@@ -1,6 +1,7 @@
 import 'package:atmacayapi/model/category.dart';
 import 'package:atmacayapi/model/product.dart';
 import 'package:atmacayapi/theme/app_color.dart';
+import 'package:atmacayapi/ui/home_screen/view/home_view.dart';
 import 'package:atmacayapi/ui/productEdit_screen/controller/productEdit_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -54,7 +55,8 @@ class ProductEditView extends StatelessWidget {
                         _productEditController.stockController.text)!));
                 ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text("Başarıyla Güncellendi")));
-                Get.back();
+                Get.delete<ProductEditController>();
+                Get.offAll(HomeView());
               }
             },
             icon: const Icon(Icons.check),
