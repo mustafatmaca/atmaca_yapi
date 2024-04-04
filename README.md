@@ -1,16 +1,20 @@
-# atmacayapi
+# Atmaca Yapı Mobile App
+Atmaca Yapı Mobile App is inventory tracking system. It is actively using by Atmaca Yapı Malzemeleri. It have add, delete, update and search functionality.
 
-A new Flutter project.
+## Technologies
+-Flutter
+-GetX
+-Firebase
 
-## Getting Started
+### Home Category Screen
+![home1](https://github.com/mustafatmaca/atmaca_yapi/assets/58891564/d37cdcfa-62a8-43e2-870d-9ba7e6cc2fc2) ![home2](https://github.com/mustafatmaca/atmaca_yapi/assets/58891564/14bc9ff3-e9c4-4cb6-8a4c-5527cf66f176)
 
-This project is a starting point for a Flutter application.
+### Home Search Screen
+![prodSearch](https://github.com/mustafatmaca/atmaca_yapi/assets/58891564/e37e70d6-8a5e-4995-b7b4-64fe684db933)
 
-A few resources to get you started if this is your first Flutter project:
+### Product Add Screen
+![prodAdd](https://github.com/mustafatmaca/atmaca_yapi/assets/58891564/430ef40c-5fef-4690-a70a-7471a36f695b)
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+### Product Detail and Edit Screen
+![prodDetail](https://github.com/mustafatmaca/atmaca_yapi/assets/58891564/ea355937-b47c-4376-929e-b85855352885) ![prodEdit](https://github.com/mustafatmaca/atmaca_yapi/assets/58891564/dde5098f-1f73-4b73-a224-b4919667e6a1)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
