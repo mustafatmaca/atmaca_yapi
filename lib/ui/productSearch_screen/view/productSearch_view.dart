@@ -22,7 +22,13 @@ class ProductSearchView extends StatelessWidget {
                   OutlineInputBorder(borderRadius: BorderRadius.circular(12.0)),
             ),
             onChanged: (value) {
+              final stopwatch = Stopwatch()..start();
               _productSearchController.getProductsByName(value);
+              stopwatch.stop();
+
+              print("⏱ Geçen süre: ${stopwatch.elapsedMilliseconds} ms");
+              print(
+                  "📦 Çekilen ürün sayısı: ${_productSearchController.products.length}");
             },
           ),
           SizedBox(

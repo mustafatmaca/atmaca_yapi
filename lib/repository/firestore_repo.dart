@@ -14,6 +14,7 @@ String normalizeTurkishChars(String input) {
 
 class FirestoreRepo {
   final firestoreInstance = FirebaseFirestore.instance;
+  List<Product>? _allProductsCache;
 
   Future<String> addCategory(String name) async {
     try {
@@ -139,12 +140,16 @@ class FirestoreRepo {
 
   Future<List<Product>> getProducts() async {
     try {
-      final snapshot =
-          await firestoreInstance.collection("products").orderBy('name').get();
-      final productList =
-          snapshot.docs.map((e) => Product.fromMap(e.data(), e.id)).toList();
-      print("Ürünler Getirildi!");
-      return productList;
+      if (_allProductsCache == null) {
+        final snapshot = await firestoreInstance
+            .collection("products")
+            .orderBy('name')
+            .get();
+        _allProductsCache =
+            snapshot.docs.map((e) => Product.fromMap(e.data(), e.id)).toList();
+        print("Ürünler Getirildi!");
+      }
+      return _allProductsCache!;
     } catch (e) {
       print("Bir hata oluştu!");
       return [];
@@ -170,12 +175,16 @@ class FirestoreRepo {
 
   Future<List<Product>> getProductsByName(String searchText) async {
     try {
-      final snapshot =
-          await firestoreInstance.collection("products").orderBy('name').get();
-      final productList =
-          snapshot.docs.map((e) => Product.fromMap(e.data(), e.id)).toList();
+      if (_allProductsCache == null) {
+        final snapshot = await firestoreInstance
+            .collection("products")
+            .orderBy('name')
+            .get();
+        _allProductsCache =
+            snapshot.docs.map((e) => Product.fromMap(e.data(), e.id)).toList();
+      }
 
-      return productList
+      return _allProductsCache!
           .where((element) => normalizeTurkishChars(element.name!.toLowerCase())
               .contains(normalizeTurkishChars(searchText.toLowerCase())))
           .toList();
