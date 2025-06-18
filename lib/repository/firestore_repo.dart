@@ -140,15 +140,12 @@ class FirestoreRepo {
 
   Future<List<Product>> getProducts() async {
     try {
-      if (_allProductsCache == null) {
-        final snapshot = await firestoreInstance
-            .collection("products")
-            .orderBy('name')
-            .get();
-        _allProductsCache =
-            snapshot.docs.map((e) => Product.fromMap(e.data(), e.id)).toList();
-        print("Ürünler Getirildi!");
-      }
+      final snapshot =
+          await firestoreInstance.collection("products").orderBy('name').get();
+      _allProductsCache =
+          snapshot.docs.map((e) => Product.fromMap(e.data(), e.id)).toList();
+      print("Ürünler Getirildi!");
+
       return _allProductsCache!;
     } catch (e) {
       print("Bir hata oluştu!");

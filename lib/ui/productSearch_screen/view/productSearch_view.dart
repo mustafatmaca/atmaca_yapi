@@ -4,8 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 class ProductSearchView extends StatelessWidget {
-  final ProductSearchController _productSearchController =
-      Get.put(ProductSearchController());
+  final ProductSearchController _productSearchController = Get.find();
   ProductSearchView({Key? key}) : super(key: key);
 
   @override
@@ -22,13 +21,7 @@ class ProductSearchView extends StatelessWidget {
                   OutlineInputBorder(borderRadius: BorderRadius.circular(12.0)),
             ),
             onChanged: (value) {
-              final stopwatch = Stopwatch()..start();
               _productSearchController.getProductsByName(value);
-              stopwatch.stop();
-
-              print("⏱ Geçen süre: ${stopwatch.elapsedMilliseconds} ms");
-              print(
-                  "📦 Çekilen ürün sayısı: ${_productSearchController.products.length}");
             },
           ),
           SizedBox(

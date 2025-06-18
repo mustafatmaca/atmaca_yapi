@@ -2,11 +2,15 @@ import 'package:atmacayapi/theme/app_color.dart';
 import 'package:atmacayapi/ui/addCategory_screen/view/addCategory_view.dart';
 import 'package:atmacayapi/ui/addProduct_screen/view/addProduct_view.dart';
 import 'package:atmacayapi/ui/home_screen/controller/home_controller.dart';
+import 'package:atmacayapi/ui/productSearch_screen/controller/productSearch_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HomeView extends StatelessWidget {
+  final ProductSearchController _productSearchController =
+      Get.put(ProductSearchController());
   final HomeController _homeController = Get.put(HomeController());
+
   HomeView({super.key});
 
   @override
